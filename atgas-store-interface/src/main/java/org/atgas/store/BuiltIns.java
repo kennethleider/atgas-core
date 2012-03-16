@@ -8,11 +8,12 @@ public class BuiltIns {
 
     public static final String BUILT_IN_SOURCE = "905a07a2-531e-4aa3-b90d-094f9f981050";
     public static final String STANDARD_STANDARD = "848b326c-c80a-4bd3-baac-d371b1857385";
+    public static final String SOURCE_STANDARD = "494a310e-1622-44c1-9bc4-54e06b738d8d";
     public static final String REPOSITORY_STANDARD = "2579d75f-fbd3-44e3-9474-7946b999b066";
     public static final String ORGANIZATIONAL_SOURCE_STANDARD = "40ad9ea3-6443-47d3-a065-4af6373ff021";
 
     public static Thing[] getBuiltInThings() {
-        return new Thing[]{createStandardStandard()};
+        return new Thing[]{ createStandardStandard(), createSourceStandard(), createBuiltinSource() };
     }
 
     private static Thing createStandardStandard() {
@@ -27,6 +28,28 @@ public class BuiltIns {
                 StandardUtils.formatField("fields", Type.String, Requirement.Optional, Multiplicity.Multiple));
         retval.setProperty("fields", fields);
 
+        return retval;
+    }
+    
+    private static Thing createSourceStandard() {
+        Thing retval = new Thing(SOURCE_STANDARD, STANDARD_STANDARD, BUILT_IN_SOURCE);
+        retval.setProperty("name", "source standard");
+        retval.setProperty("version", "1");
+        retval.setProperty("description", "The standard that describes sources of things");
+        String fields = StandardUtils.joinFields(
+                StandardUtils.formatField("name", Type.String, Requirement.Required, Multiplicity.Single),
+                StandardUtils.formatField("url", Type.String, Requirement.Optional, Multiplicity.Multiple),
+                StandardUtils.formatField("description", Type.String, Requirement.Optional, Multiplicity.Single));
+        retval.setProperty("fields", fields);
+
+        return retval;
+        
+    }
+    
+    private static Thing createBuiltinSource() {
+        Thing retval = new Thing(BUILT_IN_SOURCE, SOURCE_STANDARD, BUILT_IN_SOURCE);
+        retval.setProperty("name", "Built in source");
+        retval.setProperty("description", "The source of the nucleus things of atgas");
         return retval;
     }
 }
