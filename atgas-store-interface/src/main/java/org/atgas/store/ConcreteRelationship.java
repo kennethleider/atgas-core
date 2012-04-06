@@ -37,4 +37,14 @@ public class ConcreteRelationship implements Relationship, Serializable {
     public Thing getTarget() {
         return target;
     }
+
+    @Override
+    public String getTargetStandardID() {
+        return getTarget().getStandardID();
+    }
+
+    @Override
+    public String getTargetSourceID() {
+        return getTarget().getSourceID();
+    }
 }
