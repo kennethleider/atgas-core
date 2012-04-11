@@ -23,27 +23,35 @@ public class JSONCollector implements Callable<Change>{
     public JSONCollector(InputStream stream) {
         tokenizer = new JSONTokener(new InputStreamReader(stream));
     }
-    
+
     @Override
     public Change call() throws Exception {
         JSONObject jsonObject = new JSONObject(tokenizer);
         Change retval = new Change();
         if (jsonObject.has("add")) {
             JSONArray things = jsonObject.getJSONArray("add");
-            
+
             for (int i = 0; i < things.length(); i++) {
                 retval.add(readThing(things.getJSONObject(i)));
             }
         }
-        
+
+        if (jsonObject.has("replaces")) {
+            JSONArray things = jsonObject.getJSONArray("replaces");
+
+            for (int i = 0; i < things.length(); i++) {
+                retval.replace(readThing(things.getJSONObject(i)));
+            }
+        }
+
         if (jsonObject.has("remove")) {
             JSONArray things = jsonObject.getJSONArray("remove");
-            
+
             for (int i = 0; i < things.length(); i++) {
                 retval.remove(readThing(things.getJSONObject(i)));
             }
-        }        
-        
+        }
+
         return retval;
     }
 
@@ -61,28 +69,28 @@ public class JSONCollector implements Callable<Change>{
             JSONArray relationships = json.getJSONArray("relationships");
             for (int i = 0; i < relationships.length(); i++) {
                 thing.addRelationship(readRelationship(relationships.getJSONObject(i)));
-            }            
+            }
         }
         json.remove("atgas-id");
         json.remove("atgas-source");
         json.remove("atgas-standard");
         json.remove("relationships");
-        
+
 
         for (Iterator<String> it = json.keys(); it.hasNext();) {
-            String key = it.next();                    
-            thing.setProperty(key, json.getString(key));                    
+            String key = it.next();
+            thing.setProperty(key, json.getString(key));
         }
-        
+
         return thing;
     }
-    
+
     Relationship readRelationship(JSONObject json) throws JSONException {
         RelationshipType type = new RelationshipType(json.getString("type"));
         String standard = json.getString("atgas-standard");
         String source = json.getString("atgas-source");
         String id = json.getString("atgas-id");
-        
+
         return new ProxyRelationship(type, id, standard, source);
     }
 }
