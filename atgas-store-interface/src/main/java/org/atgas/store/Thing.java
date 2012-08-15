@@ -222,6 +222,10 @@ public final class Thing implements Serializable {
         if (object instanceof String) {
             return (String)object;
         }
+        
+        if (object == null) { 
+            return "";
+        }
         throw new IllegalArgumentException("JSONObject[" + key +
             "] not a string.");
     }

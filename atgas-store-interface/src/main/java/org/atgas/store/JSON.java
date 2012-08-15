@@ -25,24 +25,34 @@ public class JSON {
 
         return null;
     }
+    
+     public static String format(Thing thing) {
+        try {
+            return convert(thing).toString(3);
+        } catch (JSONException ex) {
+            Logger.getLogger(JSON.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
 
     public static JSONObject convert(Change change) {
         try {
             JSONObject retval = new JSONObject();
             JSONArray adds = new JSONArray();
-            retval.put("adds", adds);
+            retval.put("add", adds);
             for(Thing thing : change.getAdds()) {
                 adds.put(convert(thing));
             }
 
             JSONArray replaces = new JSONArray();
-            retval.put("replaces", replaces);
+            retval.put("replace", replaces);
             for(Thing thing : change.getReplaces()) {
                 replaces.put(convert(thing));
             }
 
             JSONArray removes = new JSONArray();
-            retval.put("removes", removes);
+            retval.put("remove", removes);
             for(Thing thing : change.getRemoves()) {
                 removes.put(convert(thing));
             }

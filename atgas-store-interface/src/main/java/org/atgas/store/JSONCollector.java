@@ -36,7 +36,7 @@ public class JSONCollector implements Callable<Change>{
             }
         }
 
-        if (jsonObject.has("replaces")) {
+        if (jsonObject.has("replace")) {
             JSONArray things = jsonObject.getJSONArray("replaces");
 
             for (int i = 0; i < things.length(); i++) {
