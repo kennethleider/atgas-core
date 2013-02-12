@@ -2,30 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.atgas.core;
+package org.atgas.core.impl;
+
+import org.atgas.core.Description;
+import org.atgas.core.Relationship;
+import org.atgas.core.Thing;
 
 /**
  *
  * @author ken
  */
-public class ProxyRelationship implements Relationship {
-    private final RelationshipType type;
+public class ShallowRelationship implements Relationship {
+    private final String type;
     private final String destinationID;
     private final String originID;
-    
-    public ProxyRelationship(RelationshipType type, Thing origin, Thing destination) {
+
+    public ShallowRelationship(String type, Thing origin, Thing destination) {
         this(type, origin.getID(), destination.getID());
     }
     
-    public ProxyRelationship(String type, Thing origin, Thing destination) {
-        this(new RelationshipType(type), origin.getID(), destination.getID());
-    }
-    
-    public ProxyRelationship(String type, String originID, String destinationID) {
-        this(new RelationshipType(type), originID, destinationID);
-    }
-    
-    public ProxyRelationship(RelationshipType type, String originID, String destinationID) {
+    public ShallowRelationship(String type, String originID, String destinationID) {
         this.type = type;
         this.originID = originID;
         this.destinationID = destinationID;
@@ -42,7 +38,7 @@ public class ProxyRelationship implements Relationship {
     }
 
     @Override
-    public RelationshipType getType() {
+    public String getType() {
         return type;
     }
     

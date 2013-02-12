@@ -7,7 +7,7 @@ package org.atgas.core.json;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.atgas.core.Change;
+import org.atgas.core.impl.ChangeImpl;
 import org.atgas.core.Relationship;
 import org.atgas.core.Thing;
 import org.json.JSONArray;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
  */
 public class JSON {
 
-    public static String format(Change change) {
+    public static String format(ChangeImpl change) {
         try {
             return convert(change).toString(3);
         } catch (JSONException ex) {
@@ -40,7 +40,7 @@ public class JSON {
         return null;
     }
 
-    public static JSONObject convert(Change change) {
+    public static JSONObject convert(ChangeImpl change) {
         try {
             JSONObject retval = new JSONObject();
             JSONArray adds = new JSONArray();

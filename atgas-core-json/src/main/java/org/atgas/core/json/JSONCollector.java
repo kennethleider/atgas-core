@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.concurrent.Callable;
 
 import org.atgas.core.*;
+import org.atgas.core.impl.ChangeImpl;
+import org.atgas.core.impl.ProxyRelationship;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +21,7 @@ import org.json.JSONTokener;
  *
  * @author ken
  */
-public class JSONCollector implements Callable<Change>{
+public class JSONCollector implements Callable<ChangeImpl>{
     private final JSONTokener tokenizer;
 
     public JSONCollector(InputStream stream) {
@@ -27,9 +29,9 @@ public class JSONCollector implements Callable<Change>{
     }
 
     @Override
-    public Change call() throws Exception {
+    public ChangeImpl call() throws Exception {
         JSONObject jsonObject = new JSONObject(tokenizer);
-        Change retval = new Change();
+        ChangeImpl retval = new ChangeImpl();
         if (jsonObject.has("add")) {
             JSONArray things = jsonObject.getJSONArray("add");
 

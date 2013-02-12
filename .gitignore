@@ -1,5 +1,2 @@
-/atgas-store-interface/nbproject/private/
-/atgas-repository-embedded/nbproject/private/
-/atgas-store-interface/build/
-/atgas-store-interface/dist/
-/atgas-store-interface/target/
+.idea
+**/target

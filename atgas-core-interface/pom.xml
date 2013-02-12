@@ -5,7 +5,7 @@
 
     <groupId>org.atgas</groupId>
     <artifactId>atgas-core-interface</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>atgas-core-interface</name>
@@ -29,5 +29,15 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0-rc2</version>
+        </dependency>
     </dependencies>
 </project>

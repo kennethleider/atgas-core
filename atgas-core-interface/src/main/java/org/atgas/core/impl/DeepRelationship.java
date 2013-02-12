@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.atgas.core;
+package org.atgas.core.impl;
+
+import org.atgas.core.Relationship;
+import org.atgas.core.Thing;
 
 import java.io.Serializable;
 
@@ -10,18 +13,12 @@ import java.io.Serializable;
  *
  * @author ken
  */
-public class ConcreteRelationship implements Relationship, Serializable {
-    private final RelationshipType type;
+public class DeepRelationship implements Relationship, Serializable {
+    private final String type;
     private final Thing origin;
     private final Thing destination;
     
-    public ConcreteRelationship(String type, Thing origin, Thing destination) {
-        this.type = new RelationshipType(type);
-        this.origin = origin;
-        this.destination = destination;
-    }
-        
-    public ConcreteRelationship(RelationshipType type, Thing origin, Thing destination) {
+    public DeepRelationship(String type, Thing origin, Thing destination) {
         this.type = type;
         this.origin = origin;
         this.destination = destination;
@@ -38,7 +35,7 @@ public class ConcreteRelationship implements Relationship, Serializable {
     }
 
     @Override
-    public RelationshipType getType() {
+    public String getType() {
         return type;
     }
 
